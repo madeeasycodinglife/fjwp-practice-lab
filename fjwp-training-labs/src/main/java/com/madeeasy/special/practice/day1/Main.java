@@ -15,22 +15,26 @@ public class Main {
 
 
         do {
-            try {
-                System.out.println("====The Grand Library====");
-                System.out.println("Please select a choice:");
-                System.out.println("1) Save new book details\n"
-                        + "2) Display all books\n"
-                        + "3) Display book using id\n"
-                        + "4) Update book using id\n"
-                        + "5) Delete book using id\n"
-                        + "6) Exit");
-
-                System.out.print("Enter your choice : ");
-                choice = sc.nextInt();
-                menu(choice);
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid choice!! \nplease try again later");
-                sc.next();
+            System.out.println("====The Grand Library====");
+            System.out.println("1) Save new book details\n"
+                    + "2) Display all books\n"
+                    + "3) Display book using id\n"
+                    + "4) Update book using id\n"
+                    + "5) Delete book using id\n"
+                    + "6) Exit");
+            System.out.print("Enter your choice : ");
+            while (true) {
+                try {
+                    choice = Integer.parseInt(sc.next().trim());
+                    menu(choice);
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Sorry, you have to enter a number !!");
+                    System.out.print("Enter your choice : ");
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid choice!! \nplease try again later");
+                    System.out.print("Enter your choice : ");
+                }
             }
 
         } while (choice != 6);
@@ -63,10 +67,11 @@ public class Main {
                 id = sc.nextInt();
                 try {
                     bService.updateBookById(id);
+                    break;
                 } catch (BookNotFoundException e) {
                     System.out.println("Book not found for book id : " + id);
                 }
-                break;
+//                break;
 
             case 5:
                 System.out.print("Enter book id to delete : ");
@@ -86,5 +91,6 @@ public class Main {
             default:
                 System.out.println("Wrong Input!!");
         }
+//        sc.nextLine();
     }
 }
