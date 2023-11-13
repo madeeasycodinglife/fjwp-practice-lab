@@ -52,7 +52,7 @@ public class EmployeeService {
 
     // update by id method
     public void updateEmployeeById(Integer id, Employee employee) {
-        Employee foundEmployee = empList.stream()
+        /*Employee foundEmployee = empList.stream()
                 .filter(emp -> emp.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found!!"));
@@ -61,9 +61,15 @@ public class EmployeeService {
         foundEmployee.setSalary(employee.getSalary());
         foundEmployee.getAddress().setCity(employee.getAddress().getCity());
         foundEmployee.getAddress().setState(employee.getAddress().getState());
+      */
+        for (Employee emp : this.empList) {
+            if (emp.getId() == id) {
+                empList.set(id, emp);
+                break;
+            }
 
+        }
         System.out.println("Employee details updated successfully:");
-        displayEmp(foundEmployee);
     }
 
     // delete by id method
