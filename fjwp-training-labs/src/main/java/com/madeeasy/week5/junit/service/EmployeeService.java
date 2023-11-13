@@ -50,7 +50,6 @@ public class EmployeeService {
         return employee;
     }
 
-    // update by id method
     public void updateEmployeeById(Integer id, Employee employee) {
         Employee foundEmployee = empList.stream()
                 .filter(emp -> emp.getId() == id)
@@ -68,6 +67,16 @@ public class EmployeeService {
                 emp.getAddress().setState(employee.getAddress().getState());
 
                 empList.set(id - 1, emp);
+                /**
+                 * or use ::-
+                 * ------------
+                 * for (int i = 0; i < empList.size(); i++) {
+                 *             if (empList.get(i).getId().equals(id)) {
+                 *                 empList.set(i, employee);
+                 *                 break;
+                 *             }
+                 * }
+                 */
                 updatedEmployee = emp;
                 break;
             }
@@ -77,7 +86,6 @@ public class EmployeeService {
         displayEmp(updatedEmployee);
     }
 
-    // delete by id method
     public void deleteEmployeeById(int empId) {
         Employee employee = empList.stream()
                 .filter(emp -> emp.getId() == empId)
